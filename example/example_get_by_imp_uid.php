@@ -29,11 +29,12 @@ if ( $result->success ) {
 	*	와 같이 custom_data를 결제 건에 대해서 지정하였을 때 정보를 추출할 수 있습니다.(서버에는 json encoded형태로 저장합니다)
 	*/
 	echo 'Custom Data :'	. $payment_data->getCustomData('my_key');
-
+	
+	# In order to process payment internally, it is necessary to check whether (1) payment is completed or not (2) the amount is matched.
 	# 내부적으로 결제완료 처리하시기 위해서는 (1) 결제완료 여부 (2) 금액이 일치하는지 확인을 해주셔야 합니다.
 	$amount_should_be_paid = 1004;
 	if ( $payment_data->status === 'paid' && $payment_data->amount === $amount_should_be_paid ) {
-		//TODO : 결제성공 처리
+		//TODO : Process successful payment (결제성공 처리)
 	}
 
 } else {
