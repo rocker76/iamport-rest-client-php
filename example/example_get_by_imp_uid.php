@@ -3,8 +3,9 @@ require_once(dirname(__DIR__).'/src/iamport.php');
 
 $iamport = new Iamport('YOUR_IMP_REST_API_KEY', 'YOUR_IMP_REST_API_SECRET');
 
+#1. Find order information with imp_uid (transaction unique number created in iamport)
 #1. imp_uid 로 주문정보 찾기(아임포트에서 생성된 거래고유번호)
-$result = $iamport->findByImpUID('your_imp_uid'); //IamportResult 를 반환(success, data, error)
+$result = $iamport->findByImpUID('your_imp_uid'); //Returns IamportResult(success, data, error)
 
 if ( $result->success ) {
 	/**
@@ -13,13 +14,13 @@ if ( $result->success ) {
 	*/
 	$payment_data = $result->data;
 
-	echo '## 결제정보 출력 ##';
-	echo '가맹점 주문번호 : ' 	. $payment_data->merchant_uid;
-	echo '결제상태 : ' 		. $payment_data->status;
-	echo '결제금액 : ' 		. $payment_data->amount;
-	echo '결제수단 : ' 		. $payment_data->pay_method;
-	echo '결제된 카드사명 : ' 	. $payment_data->card_name;
-	echo '결제 매출전표 링크 : '	. $payment_data->receipt_url;
+	echo '## Print billing information (결제정보 출력) ##';
+	echo 'Merchant Order Number (가맹점 주문번호) : ' 	. $payment_data->merchant_uid;
+	echo 'Payment status (결제상태) : ' 		. $payment_data->status;
+	echo 'Amount of payment (결제금액) : ' 		. $payment_data->amount;
+	echo 'method of payment (결제수단) : ' 		. $payment_data->pay_method;
+	echo 'Name of credit card company paid (결제된 카드사명) : ' 	. $payment_data->card_name;
+	echo 'Linking Billing Sales Documents (결제 매출전표 링크) : '	. $payment_data->receipt_url;
 
 	/**
 	*	IMP.request_pay({
